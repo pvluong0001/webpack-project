@@ -1,6 +1,6 @@
-let glob = require('glob');
+const glob = require('glob');
 
-module.exports = {
+module.exports = [{
     mode: 'development',
     entry: {
         index: [...glob.sync('./src/*.js'), ...glob.sync('./src/*.ts')],
@@ -25,4 +25,29 @@ module.exports = {
     resolve: {
         extensions: [ '.tsx', '.ts', '.js' ]
     }
-};
+}, {
+    mode: 'development',
+    entry: {
+        index2: [...glob.sync('./src/*.js'), ...glob.sync('./src/*.ts')],
+    },
+    output: {
+        // publicPath: './dist/',
+        filename: '[name].js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/
+            },
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            }
+        ]
+    },
+    resolve: {
+        extensions: [ '.tsx', '.ts', '.js' ]
+    }
+}];
