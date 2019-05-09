@@ -14,6 +14,25 @@ module.exports = {
         compress: true,
         port: 9000
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader", // creates style nodes from JS strings
+                    "css-loader", // translates CSS into CommonJS
+                ]
+            },
+            {
+                test: /\.scss$/,
+                exclude: /node_modules/,
+                use: [
+                    'css-loader',
+                    'sass-loader'
+                ]
+            }
+        ]
+    },
     plugins: [
         // new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
